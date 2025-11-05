@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catégorie Quiz - TPN Quiz</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-section" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+                <div class="logo">
+                    <img src="assets/images/Logo_quizz.png" alt="TPN Quiz Logo" class="logo-img">
+                </div>
+                <div>
+                    <div class="site-title">Team Pole numérique</div>
+                    <div class="site-subtitle">TPN Quiz</div>
+                </div>
+            </a>
+
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Taper votre recherche">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="auth-buttons">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>stagiaire 11</span>
+                </div>
+                <button class="btn btn-outline" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <div class="main-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="nav-section">
+                <div class="nav-title frontend">
+                    <i class="fas fa-desktop"></i> FRONT END
+                </div>
+                <ul class="nav-links">
+                    <li><a href="quiz-category.html?category=html" class="active"><i class="fab fa-html5"></i> HTML</a></li>
+                    <li><a href="quiz-category.html?category=css"><i class="fab fa-css3-alt"></i> CSS</a></li>
+                    <li><a href="quiz-category.html?category=js"><i class="fab fa-js"></i> JS</a></li>
+                    <li><a href="quiz-category.html?category=react"><i class="fab fa-react"></i> REACT</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title backend">
+                    <i class="fas fa-server"></i> BACK END
+                </div>
+                <ul class="nav-links">
+                    <li><a href="quiz-category.html?category=java"><i class="fab fa-java"></i> JAVA</a></li>
+                    <li><a href="quiz-category.html?category=sql"><i class="fas fa-database"></i> SQL</a></li>
+                    <li><a href="quiz-category.html?category=php"><i class="fab fa-php"></i> PHP</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- Alert Box -->
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                <span>vous êtes connecté en tant que stagiaire : stagiaire 11</span>
+            </div>
+
+            <!-- Breadcrumb -->
+            <div style="margin-bottom: 20px;">
+                <a href="student-dashboard.html" style="color: var(--primary-blue); text-decoration: none;">
+                    <i class="fas fa-home"></i> retourner à l'espace stagiaire
+                </a>
+            </div>
+
+            <!-- Category Selection -->
+            <div style="max-width: 600px; margin: 50px auto;">
+                <div style="background: white; padding: 50px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); text-align: center;">
+                    <!-- Category Icon -->
+                    <div style="margin-bottom: 30px;">
+                        <div id="categoryIcon" style="width: 120px; height: 120px; margin: 0 auto; background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);">
+                            <i class="fab fa-html5" style="font-size: 5rem; color: white;"></i>
+                        </div>
+                    </div>
+
+                    <h1 id="categoryTitle" style="font-size: 2.5rem; margin-bottom: 30px; color: var(--text-dark);">
+                        HTML
+                    </h1>
+
+                    <h2 style="font-size: 1.5rem; margin-bottom: 30px; color: var(--medium-gray);">
+                        choisir la difficulté :
+                    </h2>
+
+                    <!-- Difficulty Buttons -->
+                    <div id="difficultyButtons" style="display: flex; flex-direction: column; gap: 15px;">
+                        <a href="quiz-list.html?category=html&difficulty=facile" class="btn btn-success" style="width: 100%; padding: 20px; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                            <i class="fas fa-smile"></i> facile
+                        </a>
+                        
+                        <a href="quiz-list.html?category=html&difficulty=intermediaire" class="btn" style="width: 100%; padding: 20px; font-size: 1.2rem; background: var(--warning); color: white; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                            <i class="fas fa-meh"></i> intermédiaire
+                        </a>
+                        
+                        <a href="quiz-list.html?category=html&difficulty=difficile" class="btn" style="width: 100%; padding: 20px; font-size: 1.2rem; background: var(--red); color: white; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                            <i class="fas fa-frown"></i> difficile
+                        </a>
+                        
+                        <a href="quiz-list.html?category=html&difficulty=expert" class="btn" style="width: 100%; padding: 20px; font-size: 1.2rem; background: var(--burgundy); color: white; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                            <i class="fas fa-skull"></i> expert
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Retrouvez nous sur les réseaux</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quizz et jeux</h3>
+                <ul>
+                    <li><a href="#">Nouveautés</a></li>
+                    <li><a href="#">Popularités</a></li>
+                    <li><a href="#">Tout les quizz</a></li>
+                    <li><a href="#">Le défiez-vous ?</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informations</h3>
+                <ul>
+                    <li><a href="#">À Propos</a></li>
+                    <li><a href="#">Foire Aux Questions (FAQ)</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Mentions légales | Confidentialités | C & V</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        // Configuration des catégories
+        const categories = {
+            'html': {
+                name: 'HTML',
+                icon: 'fab fa-html5',
+                color: '#e74c3c',
+                gradient: 'linear-gradient(135deg, #e74c3c, #c0392b)',
+                shadow: 'rgba(231, 76, 60, 0.3)'
+            },
+            'css': {
+                name: 'CSS',
+                icon: 'fab fa-css3-alt',
+                color: '#3498db',
+                gradient: 'linear-gradient(135deg, #3498db, #2980b9)',
+                shadow: 'rgba(52, 152, 219, 0.3)'
+            },
+            'js': {
+                name: 'JavaScript',
+                icon: 'fab fa-js',
+                color: '#f1c40f',
+                gradient: 'linear-gradient(135deg, #f1c40f, #f39c12)',
+                shadow: 'rgba(241, 196, 15, 0.3)'
+            },
+            'javascript': {
+                name: 'JavaScript',
+                icon: 'fab fa-js',
+                color: '#f1c40f',
+                gradient: 'linear-gradient(135deg, #f1c40f, #f39c12)',
+                shadow: 'rgba(241, 196, 15, 0.3)'
+            },
+            'react': {
+                name: 'React',
+                icon: 'fab fa-react',
+                color: '#61dafb',
+                gradient: 'linear-gradient(135deg, #61dafb, #21a1f1)',
+                shadow: 'rgba(97, 218, 251, 0.3)'
+            },
+            'java': {
+                name: 'Java',
+                icon: 'fab fa-java',
+                color: '#f89820',
+                gradient: 'linear-gradient(135deg, #f89820, #d97706)',
+                shadow: 'rgba(248, 152, 32, 0.3)'
+            },
+            'sql': {
+                name: 'SQL',
+                icon: 'fas fa-database',
+                color: '#00758f',
+                gradient: 'linear-gradient(135deg, #00758f, #005f73)',
+                shadow: 'rgba(0, 117, 143, 0.3)'
+            },
+            'php': {
+                name: 'PHP',
+                icon: 'fab fa-php',
+                color: '#777bb3',
+                gradient: 'linear-gradient(135deg, #777bb3, #5a5a8f)',
+                shadow: 'rgba(119, 123, 179, 0.3)'
+            }
+        };
+
+        // Récupérer la catégorie depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category') || 'html';
+        const categoryData = categories[category.toLowerCase()] || categories['html'];
+
+        // Mettre à jour le titre
+        document.getElementById('categoryTitle').textContent = categoryData.name;
+
+        // Mettre à jour l'icône
+        const iconContainer = document.getElementById('categoryIcon');
+        iconContainer.style.background = categoryData.gradient;
+        iconContainer.style.boxShadow = `0 10px 30px ${categoryData.shadow}`;
+        iconContainer.innerHTML = `<i class="${categoryData.icon}" style="font-size: 5rem; color: white;"></i>`;
+
+        // Mettre à jour les liens des boutons de difficulté
+        const buttons = document.querySelectorAll('#difficultyButtons a');
+        buttons.forEach(button => {
+            const difficulty = button.href.split('difficulty=')[1];
+            if (difficulty) {
+                button.href = `quiz-list.html?category=${category}&difficulty=${difficulty}`;
+            }
+        });
+
+        // Mettre à jour la classe active dans la sidebar
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active');
+            if (link.href.includes(`category=${category}`)) {
+                link.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
+

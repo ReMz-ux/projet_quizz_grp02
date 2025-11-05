@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - TPN Quiz</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-section" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+                <div class="logo">
+                    <img src="assets/images/Logo_quizz.png" alt="TPN Quiz Logo" class="logo-img">
+                </div>
+                <div>
+                    <div class="site-title">Team Pole numérique</div>
+                    <div class="site-subtitle">TPN Quiz</div>
+                </div>
+            </a>
+
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Taper votre recherche">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="auth-buttons">
+                <a href="index.html" class="btn btn-outline">Accueil</a>
+                <a href="login.html" class="btn btn-primary">Se connecter</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" style="min-height: calc(100vh - 350px);">
+        <div class="form-container">
+            <h2><i class="fas fa-user-plus"></i> Créer un compte</h2>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="nom"><i class="fas fa-user"></i> Nom</label>
+                    <input type="text" id="nom" name="nom" required placeholder="Votre nom">
+                </div>
+
+                <div class="form-group">
+                    <label for="prenom"><i class="fas fa-user"></i> Prénom</label>
+                    <input type="text" id="prenom" name="prenom" required placeholder="Votre prénom">
+                </div>
+
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" name="email" required placeholder="votreemail@exemple.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Mot de passe</label>
+                    <input type="password" id="password" name="password" required placeholder="••••••••">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword"><i class="fas fa-lock"></i> Confirmer le mot de passe</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="••••••••">
+                </div>
+
+                <div class="form-group">
+                    <label for="userType"><i class="fas fa-user-tag"></i> Type d'utilisateur</label>
+                    <select id="userType" name="userType" required>
+                        <option value="">-- Sélectionner --</option>
+                        <option value="stagiaire">Stagiaire</option>
+                        <option value="formateur">Formateur</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-secondary" style="width: 100%;">
+                        <i class="fas fa-user-plus"></i> S'inscrire
+                    </button>
+                </div>
+
+                <div class="form-link">
+                    <p>Déjà un compte ? <a href="login.html">Se connecter</a></p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Retrouvez nous sur les réseaux</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quizz et jeux</h3>
+                <ul>
+                    <li><a href="#">Nouveautés</a></li>
+                    <li><a href="#">Popularités</a></li>
+                    <li><a href="#">Tout les quizz</a></li>
+                    <li><a href="#">Le défiez-vous ?</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informations</h3>
+                <ul>
+                    <li><a href="#">À Propos</a></li>
+                    <li><a href="#">Foire Aux Questions (FAQ)</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Mentions légales | Confidentialités | C & V</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
+

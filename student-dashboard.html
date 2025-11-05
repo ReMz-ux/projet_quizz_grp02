@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Stagiaire - TPN Quiz</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-section" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+                <div class="logo">
+                    <img src="assets/images/Logo_quizz.png" alt="TPN Quiz Logo" class="logo-img">
+                </div>
+                <div>
+                    <div class="site-title">Team Pole numérique</div>
+                    <div class="site-subtitle">TPN Quiz</div>
+                </div>
+            </a>
+
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Taper votre recherche">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="auth-buttons">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>stagiaire 31</span>
+                </div>
+                <button class="btn btn-outline" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <div class="main-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="nav-section">
+                <div class="nav-title frontend">
+                    <i class="fas fa-desktop"></i> FRONT END
+                </div>
+                <ul class="nav-links">
+                    <li><a href="quiz-category.html?category=html"><i class="fab fa-html5"></i> HTML</a></li>
+                    <li><a href="quiz-category.html?category=css"><i class="fab fa-css3-alt"></i> CSS</a></li>
+                    <li><a href="quiz-category.html?category=js"><i class="fab fa-js"></i> JS</a></li>
+                    <li><a href="quiz-category.html?category=react"><i class="fab fa-react"></i> REACT</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title backend">
+                    <i class="fas fa-server"></i> BACK END
+                </div>
+                <ul class="nav-links">
+                    <li><a href="quiz-category.html?category=java"><i class="fab fa-java"></i> JAVA</a></li>
+                    <li><a href="quiz-category.html?category=sql"><i class="fas fa-database"></i> SQL</a></li>
+                    <li><a href="quiz-category.html?category=php"><i class="fab fa-php"></i> PHP</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- Alert Box -->
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                <span>vous êtes connecté en tant que stagiaire : stagiaire 31</span>
+            </div>
+
+            <!-- Page Title -->
+            <h1 style="margin-bottom: 30px; color: var(--text-dark);">
+                <i class="fas fa-tachometer-alt"></i> espace stagiaire
+            </h1>
+
+            <!-- User Profile Card -->
+            <div class="profile-header" style="margin-bottom: 40px;">
+                <div class="profile-avatar-large">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="profile-info">
+                    <h2>stagiaire 31</h2>
+                    <span class="profile-role"><i class="fas fa-user-graduate"></i> Stagiaire</span>
+                    <p style="margin-top: 10px; color: var(--medium-gray);">
+                        Membre depuis le 15 septembre 2024
+                    </p>
+                </div>
+                <div style="margin-left: auto;">
+                    <a href="profile.html" class="btn btn-secondary">
+                        <i class="fas fa-edit"></i> espace profil
+                    </a>
+                    <a href="profile-security.html" class="btn btn-outline" style="margin-left: 10px; color: var(--text-dark); border-color: var(--medium-gray);">
+                        <i class="fas fa-shield-alt"></i> espace sécurité du compte
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>24</h3>
+                        <p>Quiz complétés</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>85%</h3>
+                        <p>Taux de réussite</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon yellow">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>12</h3>
+                        <p>Badges gagnés</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon red">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>7</h3>
+                        <p>Jours consécutifs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); margin-bottom: 30px;">
+                <h2 style="margin-bottom: 20px;">
+                    <i class="fas fa-bolt"></i> Actions rapides
+                </h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <a href="quiz-list.html" class="btn btn-secondary" style="width: 100%; text-align: center;">
+                        <i class="fas fa-list"></i> Tous les quiz
+                    </a>
+                    <a href="statistics.html" class="btn btn-secondary" style="width: 100%; text-align: center;">
+                        <i class="fas fa-chart-line"></i> Mes statistiques
+                    </a>
+                    <a href="quiz-category.html?category=html" class="btn btn-secondary" style="width: 100%; text-align: center;">
+                        <i class="fas fa-play"></i> Commencer un quiz
+                    </a>
+                    <a href="profile.html" class="btn btn-secondary" style="width: 100%; text-align: center;">
+                        <i class="fas fa-user-cog"></i> Mon profil
+                    </a>
+                </div>
+            </div>
+
+            <!-- Recent Quiz -->
+            <h2 style="margin-bottom: 20px;">
+                <i class="fas fa-history"></i> Quiz récents
+            </h2>
+            <div class="cards-grid">
+                <div class="quiz-card">
+                    <div class="quiz-header">
+                        <div>
+                            <h3 class="quiz-title">Les bases du HTML</h3>
+                            <span class="quiz-badge badge-facile">Facile</span>
+                        </div>
+                    </div>
+                    <div class="quiz-meta">
+                        <span><i class="fas fa-question-circle"></i> 10 questions</span>
+                        <span><i class="fas fa-clock"></i> 10 min</span>
+                        <span><i class="fas fa-trophy"></i> 90%</span>
+                    </div>
+                    <p class="quiz-description">
+                        Testez vos connaissances sur les bases du HTML5
+                    </p>
+                    <div class="quiz-actions">
+                        <a href="quiz-results.html?id=1" class="btn btn-secondary btn-small">
+                            <i class="fas fa-chart-bar"></i> Voir résultat
+                        </a>
+                        <a href="quiz-play.html?id=1" class="btn btn-outline btn-small" style="color: var(--text-dark); border-color: var(--medium-gray);">
+                            <i class="fas fa-redo"></i> Refaire
+                        </a>
+                    </div>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="quiz-header">
+                        <div>
+                            <h3 class="quiz-title">CSS Flexbox</h3>
+                            <span class="quiz-badge badge-intermediaire">Intermédiaire</span>
+                        </div>
+                    </div>
+                    <div class="quiz-meta">
+                        <span><i class="fas fa-question-circle"></i> 15 questions</span>
+                        <span><i class="fas fa-clock"></i> 15 min</span>
+                        <span><i class="fas fa-trophy"></i> 75%</span>
+                    </div>
+                    <p class="quiz-description">
+                        Maîtrisez le système de mise en page Flexbox
+                    </p>
+                    <div class="quiz-actions">
+                        <a href="quiz-results.html?id=2" class="btn btn-secondary btn-small">
+                            <i class="fas fa-chart-bar"></i> Voir résultat
+                        </a>
+                        <a href="quiz-play.html?id=2" class="btn btn-outline btn-small" style="color: var(--text-dark); border-color: var(--medium-gray);">
+                            <i class="fas fa-redo"></i> Refaire
+                        </a>
+                    </div>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="quiz-header">
+                        <div>
+                            <h3 class="quiz-title">JavaScript ES6+</h3>
+                            <span class="quiz-badge badge-difficile">Difficile</span>
+                        </div>
+                    </div>
+                    <div class="quiz-meta">
+                        <span><i class="fas fa-question-circle"></i> 20 questions</span>
+                        <span><i class="fas fa-clock"></i> 25 min</span>
+                        <span><i class="fas fa-trophy"></i> 88%</span>
+                    </div>
+                    <p class="quiz-description">
+                        Les fonctionnalités avancées de JavaScript ES6+
+                    </p>
+                    <div class="quiz-actions">
+                        <a href="quiz-results.html?id=3" class="btn btn-secondary btn-small">
+                            <i class="fas fa-chart-bar"></i> Voir résultat
+                        </a>
+                        <a href="quiz-play.html?id=3" class="btn btn-outline btn-small" style="color: var(--text-dark); border-color: var(--medium-gray);">
+                            <i class="fas fa-redo"></i> Refaire
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Retrouvez nous sur les réseaux</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quizz et jeux</h3>
+                <ul>
+                    <li><a href="#">Nouveautés</a></li>
+                    <li><a href="#">Popularités</a></li>
+                    <li><a href="#">Tout les quizz</a></li>
+                    <li><a href="#">Le défiez-vous ?</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informations</h3>
+                <ul>
+                    <li><a href="#">À Propos</a></li>
+                    <li><a href="#">Foire Aux Questions (FAQ)</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Mentions légales | Confidentialités | C & V</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
+

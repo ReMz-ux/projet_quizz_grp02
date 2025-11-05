@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats du Quiz - TPN Quiz</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-section" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+                <div class="logo">
+                    <img src="assets/images/Logo_quizz.png" alt="TPN Quiz Logo" class="logo-img">
+                </div>
+                <div>
+                    <div class="site-title">Team Pole numérique</div>
+                    <div class="site-subtitle">TPN Quiz</div>
+                </div>
+            </a>
+
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Taper votre recherche">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="auth-buttons">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>stagiaire 11</span>
+                </div>
+                <button class="btn btn-outline" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" style="min-height: calc(100vh - 350px); background: var(--light-gray);">
+        <div class="results-container">
+            <div class="results-card">
+                <!-- Score Circle -->
+                <div class="score-circle excellent">
+                    90%
+                    <div class="score-label">Score</div>
+                </div>
+
+                <!-- Results Message -->
+                <h1 class="results-message">
+                    <i class="fas fa-trophy" style="color: var(--warning);"></i> Excellent travail !
+                </h1>
+                <p style="color: var(--medium-gray); font-size: 1.1rem; margin-bottom: 30px;">
+                    Vous avez complété le quiz : <strong>Introduction au HTML</strong>
+                </p>
+
+                <!-- Results Details -->
+                <div class="results-details">
+                    <div class="result-stat">
+                        <div class="number">9</div>
+                        <div class="label">Correctes</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="number" style="color: var(--red);">1</div>
+                        <div class="label">Incorrectes</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="number" style="color: var(--warning);">10</div>
+                        <div class="label">Total</div>
+                    </div>
+                </div>
+
+                <!-- Time Info -->
+                <div style="background: var(--light-gray); padding: 15px; border-radius: 10px; margin: 20px 0;">
+                    <p style="color: var(--medium-gray);">
+                        <i class="fas fa-clock"></i> Temps écoulé : <strong style="color: var(--text-dark);">8 minutes 32 secondes</strong>
+                    </p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
+                    <a href="quiz-play.html?id=1" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i> Refaire le quiz
+                    </a>
+                    <a href="quiz-list.html" class="btn btn-outline" style="color: var(--text-dark); border-color: var(--medium-gray);">
+                        <i class="fas fa-list"></i> Autres quiz
+                    </a>
+                    <a href="student-dashboard.html" class="btn btn-outline" style="color: var(--text-dark); border-color: var(--medium-gray);">
+                        <i class="fas fa-home"></i> Tableau de bord
+                    </a>
+                </div>
+
+                <!-- Share Section -->
+                <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--light-gray);">
+                    <p style="color: var(--medium-gray); margin-bottom: 15px;">
+                        <i class="fas fa-share-alt"></i> Partager vos résultats :
+                    </p>
+                    <div class="social-links" style="justify-content: center;">
+                        <a href="#" class="social-icon" style="position: relative; background: #1877f2;">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon" style="position: relative; background: #1da1f2;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon" style="position: relative; background: #0077b5;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-icon" style="position: relative; background: #25d366;">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Results (Optional) -->
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); margin-top: 30px;">
+                <h2 style="margin-bottom: 20px;">
+                    <i class="fas fa-list-check"></i> Révision des questions
+                </h2>
+                
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <!-- Question 1 -->
+                    <div style="padding: 15px; background: rgba(39, 174, 96, 0.1); border-left: 4px solid var(--success); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 600;">Question 1 : Que signifie HTML ?</span>
+                            <span style="color: var(--success);"><i class="fas fa-check-circle"></i> Correct</span>
+                        </div>
+                        <p style="margin-top: 8px; color: var(--medium-gray); font-size: 0.9rem;">
+                            Votre réponse : <strong>HyperText Markup Language</strong>
+                        </p>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div style="padding: 15px; background: rgba(39, 174, 96, 0.1); border-left: 4px solid var(--success); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 600;">Question 2 : Quelle balise crée un titre principal ?</span>
+                            <span style="color: var(--success);"><i class="fas fa-check-circle"></i> Correct</span>
+                        </div>
+                        <p style="margin-top: 8px; color: var(--medium-gray); font-size: 0.9rem;">
+                            Votre réponse : <strong>&lt;h1&gt;</strong>
+                        </p>
+                    </div>
+
+                    <!-- Question 3 - Incorrect -->
+                    <div style="padding: 15px; background: rgba(231, 76, 60, 0.1); border-left: 4px solid var(--red); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 600;">Question 3 : Quelle balise crée un lien ?</span>
+                            <span style="color: var(--red);"><i class="fas fa-times-circle"></i> Incorrect</span>
+                        </div>
+                        <p style="margin-top: 8px; color: var(--medium-gray); font-size: 0.9rem;">
+                            Votre réponse : <strong style="color: var(--red);">&lt;link&gt;</strong><br>
+                            Bonne réponse : <strong style="color: var(--success);">&lt;a&gt;</strong>
+                        </p>
+                    </div>
+
+                    <!-- More questions... -->
+                    <button class="btn btn-outline" style="margin-top: 10px; color: var(--text-dark); border-color: var(--medium-gray);">
+                        <i class="fas fa-chevron-down"></i> Voir toutes les questions
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Retrouvez nous sur les réseaux</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quizz et jeux</h3>
+                <ul>
+                    <li><a href="#">Nouveautés</a></li>
+                    <li><a href="#">Popularités</a></li>
+                    <li><a href="#">Tout les quizz</a></li>
+                    <li><a href="#">Le défiez-vous ?</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informations</h3>
+                <ul>
+                    <li><a href="#">À Propos</a></li>
+                    <li><a href="#">Foire Aux Questions (FAQ)</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Mentions légales | Confidentialités | C & V</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
+

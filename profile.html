@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil - TPN Quiz</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-section" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+                <div class="logo">
+                    <img src="assets/images/Logo_quizz.png" alt="TPN Quiz Logo" class="logo-img">
+                </div>
+                <div>
+                    <div class="site-title">Team Pole numérique</div>
+                    <div class="site-subtitle">TPN Quiz</div>
+                </div>
+            </a>
+
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Taper votre recherche">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="auth-buttons">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>stagiaire 11</span>
+                </div>
+                <button class="btn btn-outline" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" style="min-height: calc(100vh - 350px); padding: 40px; max-width: 1000px; margin: 0 auto;">
+        <!-- Breadcrumb -->
+        <div style="margin-bottom: 20px;">
+            <a href="student-dashboard.html" style="color: var(--primary-blue); text-decoration: none;">
+                <i class="fas fa-home"></i> Tableau de bord
+            </a>
+            <span style="margin: 0 10px; color: var(--medium-gray);">/</span>
+            <span style="color: var(--medium-gray);">Mon profil</span>
+        </div>
+
+        <!-- Page Title -->
+        <h1 style="color: var(--text-dark); margin-bottom: 30px;">
+            <i class="fas fa-user-circle"></i> espace profil
+        </h1>
+
+        <!-- Profile Card -->
+        <div class="profile-header" style="margin-bottom: 40px;">
+            <div class="profile-avatar-large">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-info">
+                <h2>stagiaire 11</h2>
+                <span class="profile-role"><i class="fas fa-user-graduate"></i> Stagiaire</span>
+                <p style="margin-top: 10px; color: var(--medium-gray);">
+                    <i class="fas fa-envelope"></i> stagiaire11@email.com
+                </p>
+                <p style="color: var(--medium-gray);">
+                    <i class="fas fa-calendar"></i> Membre depuis le 15 septembre 2024
+                </p>
+            </div>
+        </div>
+
+        <!-- Profile Form -->
+        <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
+            <h2 style="margin-bottom: 25px; color: var(--text-dark);">
+                <i class="fas fa-edit"></i> Modifier mes informations
+            </h2>
+
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="nom"><i class="fas fa-user"></i> Nom</label>
+                    <input type="text" id="nom" name="nom" value="Stagiaire" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="prenom"><i class="fas fa-user"></i> Prénom</label>
+                    <input type="text" id="prenom" name="prenom" value="Numéro 11" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" name="email" value="stagiaire11@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telephone"><i class="fas fa-phone"></i> Téléphone</label>
+                    <input type="tel" id="telephone" name="telephone" value="+33 6 12 34 56 78" placeholder="+33 X XX XX XX XX">
+                </div>
+
+                <div class="form-group">
+                    <label for="bio"><i class="fas fa-align-left"></i> Biographie</label>
+                    <textarea id="bio" name="bio" placeholder="Parlez-nous de vous...">Passionné de développement web, j'apprends chaque jour de nouvelles technologies.</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="website"><i class="fas fa-globe"></i> Site web</label>
+                    <input type="url" id="website" name="website" placeholder="https://monsite.com">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="fas fa-save"></i> Enregistrer les modifications
+                    </button>
+                    <button type="button" class="btn btn-outline" style="color: var(--text-dark); border-color: var(--medium-gray);" onclick="window.history.back()">
+                        <i class="fas fa-times"></i> Annuler
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Profile Stats -->
+        <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); margin-top: 30px;">
+            <h2 style="margin-bottom: 20px; color: var(--text-dark);">
+                <i class="fas fa-chart-line"></i> Mes statistiques
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+                <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 10px;">
+                    <div style="font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 10px;">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--text-dark);">24</div>
+                    <div style="color: var(--medium-gray);">Quiz complétés</div>
+                </div>
+
+                <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 10px;">
+                    <div style="font-size: 2.5rem; color: var(--success); margin-bottom: 10px;">
+                        <i class="fas fa-percent"></i>
+                    </div>
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--text-dark);">85%</div>
+                    <div style="color: var(--medium-gray);">Taux de réussite</div>
+                </div>
+
+                <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 10px;">
+                    <div style="font-size: 2.5rem; color: var(--warning); margin-bottom: 10px;">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--text-dark);">12</div>
+                    <div style="color: var(--medium-gray);">Badges</div>
+                </div>
+
+                <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 10px;">
+                    <div style="font-size: 2.5rem; color: var(--red); margin-bottom: 10px;">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--text-dark);">7</div>
+                    <div style="color: var(--medium-gray);">Jours consécutifs</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preferences -->
+        <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); margin-top: 30px;">
+            <h2 style="margin-bottom: 20px; color: var(--text-dark);">
+                <i class="fas fa-cog"></i> Préférences
+            </h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: var(--light-gray); border-radius: 10px;">
+                    <div>
+                        <strong>Notifications par email</strong>
+                        <p style="color: var(--medium-gray); font-size: 0.9rem; margin-top: 5px;">Recevoir des notifications sur les nouveaux quiz</p>
+                    </div>
+                    <label style="position: relative; display: inline-block; width: 60px; height: 30px;">
+                        <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                        <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--success); transition: .4s; border-radius: 30px;"></span>
+                    </label>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: var(--light-gray); border-radius: 10px;">
+                    <div>
+                        <strong>Affichage du mode sombre</strong>
+                        <p style="color: var(--medium-gray); font-size: 0.9rem; margin-top: 5px;">Activer le thème sombre</p>
+                    </div>
+                    <label style="position: relative; display: inline-block; width: 60px; height: 30px;">
+                        <input type="checkbox" style="opacity: 0; width: 0; height: 0;">
+                        <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--medium-gray); transition: .4s; border-radius: 30px;"></span>
+                    </label>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: var(--light-gray); border-radius: 10px;">
+                    <div>
+                        <strong>Afficher mes résultats publiquement</strong>
+                        <p style="color: var(--medium-gray); font-size: 0.9rem; margin-top: 5px;">Permettre aux autres de voir vos scores</p>
+                    </div>
+                    <label style="position: relative; display: inline-block; width: 60px; height: 30px;">
+                        <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                        <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--success); transition: .4s; border-radius: 30px;"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div style="background: rgba(231, 76, 60, 0.1); border: 2px solid var(--red); padding: 30px; border-radius: 15px; margin-top: 30px;">
+            <h2 style="margin-bottom: 20px; color: var(--red);">
+                <i class="fas fa-exclamation-triangle"></i> Zone dangereuse
+            </h2>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong style="color: var(--text-dark);">Supprimer mon compte</strong>
+                    <p style="color: var(--medium-gray); font-size: 0.9rem; margin-top: 5px;">
+                        Une fois supprimé, votre compte ne pourra pas être récupéré
+                    </p>
+                </div>
+                <button class="btn btn-confirm">
+                    <i class="fas fa-trash"></i> Supprimer le compte
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Retrouvez nous sur les réseaux</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quizz et jeux</h3>
+                <ul>
+                    <li><a href="#">Nouveautés</a></li>
+                    <li><a href="#">Popularités</a></li>
+                    <li><a href="#">Tout les quizz</a></li>
+                    <li><a href="#">Le défiez-vous ?</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informations</h3>
+                <ul>
+                    <li><a href="#">À Propos</a></li>
+                    <li><a href="#">Foire Aux Questions (FAQ)</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Mentions légales | Confidentialités | C & V</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
+

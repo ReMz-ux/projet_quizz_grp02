@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jouer au Quiz - TPN Quiz</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-section" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+                <div class="logo">
+                    <img src="assets/images/Logo_quizz.png" alt="TPN Quiz Logo" class="logo-img">
+                </div>
+                <div>
+                    <div class="site-title">Team Pole numérique</div>
+                    <div class="site-subtitle">TPN Quiz</div>
+                </div>
+            </a>
+
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Taper votre recherche">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="auth-buttons">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>stagiaire 11</span>
+                </div>
+                <button class="btn btn-outline" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" style="min-height: calc(100vh - 350px); background: var(--light-gray);">
+        <div class="quiz-container">
+            <!-- Quiz Header -->
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h1 style="color: var(--text-dark); margin-bottom: 10px;">
+                    <i class="fab fa-html5" style="color: #e74c3c;"></i> Introduction au HTML
+                </h1>
+                <span class="quiz-badge badge-facile" style="font-size: 1rem;">Facile</span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="quiz-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 30%;" id="progressBar"></div>
+                </div>
+                <div class="progress-text">
+                    Question <span id="currentQuestion">3</span> sur <span id="totalQuestions">10</span>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="question-card">
+                <div class="question-number">
+                    <i class="fas fa-question-circle"></i> Question 3
+                </div>
+                <h2 class="question-text">
+                    Quelle balise HTML est utilisée pour créer un paragraphe ?
+                </h2>
+
+                <div class="answers-list">
+                    <div class="answer-option" onclick="selectAnswer(this)">
+                        <input type="radio" name="answer" id="answer1" style="margin-right: 10px;">
+                        <label for="answer1" style="cursor: pointer; flex: 1;">
+                            <strong>A.</strong> &lt;paragraph&gt;
+                        </label>
+                    </div>
+
+                    <div class="answer-option" onclick="selectAnswer(this)">
+                        <input type="radio" name="answer" id="answer2" style="margin-right: 10px;">
+                        <label for="answer2" style="cursor: pointer; flex: 1;">
+                            <strong>B.</strong> &lt;p&gt;
+                        </label>
+                    </div>
+
+                    <div class="answer-option" onclick="selectAnswer(this)">
+                        <input type="radio" name="answer" id="answer3" style="margin-right: 10px;">
+                        <label for="answer3" style="cursor: pointer; flex: 1;">
+                            <strong>C.</strong> &lt;para&gt;
+                        </label>
+                    </div>
+
+                    <div class="answer-option" onclick="selectAnswer(this)">
+                        <input type="radio" name="answer" id="answer4" style="margin-right: 10px;">
+                        <label for="answer4" style="cursor: pointer; flex: 1;">
+                            <strong>D.</strong> &lt;text&gt;
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="quiz-navigation">
+                <button class="btn btn-outline" style="color: var(--text-dark); border-color: var(--medium-gray);" onclick="previousQuestion()">
+                    <i class="fas fa-arrow-left"></i> Précédent
+                </button>
+                <button class="btn btn-secondary" onclick="nextQuestion()" id="nextBtn">
+                    Suivant <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Timer (optional) -->
+            <div style="text-align: center; margin-top: 20px; color: var(--medium-gray);">
+                <i class="fas fa-clock"></i> Temps restant : <span id="timer" style="font-weight: bold; color: var(--primary-blue);">7:45</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Retrouvez nous sur les réseaux</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quizz et jeux</h3>
+                <ul>
+                    <li><a href="#">Nouveautés</a></li>
+                    <li><a href="#">Popularités</a></li>
+                    <li><a href="#">Tout les quizz</a></li>
+                    <li><a href="#">Le défiez-vous ?</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informations</h3>
+                <ul>
+                    <li><a href="#">À Propos</a></li>
+                    <li><a href="#">Foire Aux Questions (FAQ)</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Mentions légales | Confidentialités | C & V</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        // Simple quiz interaction functions
+        function selectAnswer(element) {
+            // Remove selected class from all options
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            
+            // Check the radio button
+            element.querySelector('input[type="radio"]').checked = true;
+        }
+
+        function previousQuestion() {
+            // Logic to go to previous question
+            alert('Retour à la question précédente (à implémenter avec l\'API)');
+        }
+
+        function nextQuestion() {
+            const selected = document.querySelector('input[name="answer"]:checked');
+            if (!selected) {
+                alert('Veuillez sélectionner une réponse');
+                return;
+            }
+            
+            // Logic to go to next question or submit quiz
+            alert('Passage à la question suivante (à implémenter avec l\'API)');
+            // window.location.href = 'quiz-results.html?id=1';
+        }
+
+        // Timer countdown (example)
+        let timeLeft = 465; // 7:45 in seconds
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+            } else {
+                alert('Temps écoulé !');
+                // Auto-submit quiz
+            }
+        }
+        
+        setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
+

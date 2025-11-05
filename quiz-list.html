@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Quiz - TPN Quiz</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-section" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+                <div class="logo">
+                    <img src="assets/images/Logo_quizz.png" alt="TPN Quiz Logo" class="logo-img">
+                </div>
+                <div>
+                    <div class="site-title">Team Pole numérique</div>
+                    <div class="site-subtitle">TPN Quiz</div>
+                </div>
+            </a>
+
+            <div class="search-bar">
+                <input type="text" class="search-input" id="searchQuiz" placeholder="Rechercher un quiz...">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="auth-buttons">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>stagiaire 11</span>
+                </div>
+                <button class="btn btn-outline" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <div class="main-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="nav-section">
+                <div class="nav-title frontend">
+                    <i class="fas fa-desktop"></i> FRONT END
+                </div>
+                <ul class="nav-links">
+                    <li><a href="quiz-category.html?category=html" class="active"><i class="fab fa-html5"></i> HTML</a></li>
+                    <li><a href="quiz-category.html?category=css"><i class="fab fa-css3-alt"></i> CSS</a></li>
+                    <li><a href="quiz-category.html?category=js"><i class="fab fa-js"></i> JS</a></li>
+                    <li><a href="quiz-category.html?category=react"><i class="fab fa-react"></i> REACT</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title backend">
+                    <i class="fas fa-server"></i> BACK END
+                </div>
+                <ul class="nav-links">
+                    <li><a href="quiz-category.html?category=java"><i class="fab fa-java"></i> JAVA</a></li>
+                    <li><a href="quiz-category.html?category=sql"><i class="fas fa-database"></i> SQL</a></li>
+                    <li><a href="quiz-category.html?category=php"><i class="fab fa-php"></i> PHP</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- Breadcrumb -->
+            <div id="breadcrumb" style="margin-bottom: 20px;">
+                <a href="student-dashboard.html" style="color: var(--primary-blue); text-decoration: none;">
+                    <i class="fas fa-home"></i> Tableau de bord
+                </a>
+                <span style="margin: 0 10px; color: var(--medium-gray);">/</span>
+                <a id="breadcrumbCategory" href="quiz-category.html?category=html" style="color: var(--primary-blue); text-decoration: none;">
+                    HTML
+                </a>
+                <span style="margin: 0 10px; color: var(--medium-gray);">/</span>
+                <span id="breadcrumbDifficulty" style="color: var(--medium-gray);">Facile</span>
+            </div>
+
+            <!-- Page Header -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <div>
+                    <h1 id="pageTitle" style="color: var(--text-dark); margin-bottom: 10px;">
+                        <i id="pageIcon" class="fab fa-html5" style="color: #e74c3c;"></i> Quiz HTML - Facile
+                    </h1>
+                    <p style="color: var(--medium-gray);">
+                        <i class="fas fa-list"></i> <span id="quizCount">12</span> quiz disponibles
+                    </p>
+                </div>
+
+                <!-- Filters -->
+                <div style="display: flex; gap: 15px;">
+                    <select class="form-control" style="padding: 10px 15px; border: 2px solid var(--light-gray); border-radius: 8px;">
+                        <option>Trier par : Popularité</option>
+                        <option>Trier par : Date</option>
+                        <option>Trier par : Difficulté</option>
+                        <option>Trier par : Nom</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Quiz Cards -->
+            <div class="cards-grid" id="quizCardsContainer">
+                <!-- Les quiz seront chargés dynamiquement ici -->
+            </div>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Retrouvez nous sur les réseaux</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quizz et jeux</h3>
+                <ul>
+                    <li><a href="#">Nouveautés</a></li>
+                    <li><a href="#">Popularités</a></li>
+                    <li><a href="#">Tout les quizz</a></li>
+                    <li><a href="#">Le défiez-vous ?</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informations</h3>
+                <ul>
+                    <li><a href="#">À Propos</a></li>
+                    <li><a href="#">Foire Aux Questions (FAQ)</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Mentions légales | Confidentialités | C & V</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        // Configuration des catégories (même que quiz-category.html)
+        const categories = {
+            'html': {
+                name: 'HTML',
+                icon: 'fab fa-html5',
+                color: '#e74c3c'
+            },
+            'css': {
+                name: 'CSS',
+                icon: 'fab fa-css3-alt',
+                color: '#3498db'
+            },
+            'js': {
+                name: 'JavaScript',
+                icon: 'fab fa-js',
+                color: '#f1c40f'
+            },
+            'javascript': {
+                name: 'JavaScript',
+                icon: 'fab fa-js',
+                color: '#f1c40f'
+            },
+            'react': {
+                name: 'React',
+                icon: 'fab fa-react',
+                color: '#61dafb'
+            },
+            'java': {
+                name: 'Java',
+                icon: 'fab fa-java',
+                color: '#f89820'
+            },
+            'sql': {
+                name: 'SQL',
+                icon: 'fas fa-database',
+                color: '#00758f'
+            },
+            'php': {
+                name: 'PHP',
+                icon: 'fab fa-php',
+                color: '#777bb3'
+            }
+        };
+
+        // Configuration des difficultés
+        const difficulties = {
+            'facile': {
+                name: 'Facile',
+                displayName: 'Facile'
+            },
+            'intermediaire': {
+                name: 'Intermédiaire',
+                displayName: 'Intermédiaire'
+            },
+            'difficile': {
+                name: 'Difficile',
+                displayName: 'Difficile'
+            },
+            'expert': {
+                name: 'Expert',
+                displayName: 'Expert'
+            }
+        };
+
+        // Récupérer les paramètres depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category') || 'html';
+        const difficulty = urlParams.get('difficulty') || 'facile';
+        
+        const categoryData = categories[category.toLowerCase()] || categories['html'];
+        const difficultyData = difficulties[difficulty.toLowerCase()] || difficulties['facile'];
+
+        // Mettre à jour le breadcrumb
+        document.getElementById('breadcrumbCategory').textContent = categoryData.name;
+        document.getElementById('breadcrumbCategory').href = `quiz-category.html?category=${category}`;
+        document.getElementById('breadcrumbDifficulty').textContent = difficultyData.displayName;
+
+        // Mettre à jour l'icône et le titre
+        const pageIcon = document.getElementById('pageIcon');
+        pageIcon.className = categoryData.icon;
+        pageIcon.style.color = categoryData.color;
+        
+        document.getElementById('pageTitle').innerHTML = `<i class="${categoryData.icon}" style="color: ${categoryData.color};"></i> Quiz ${categoryData.name} - ${difficultyData.displayName}`;
+
+        // Mettre à jour la classe active dans la sidebar
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active');
+            if (link.href.includes(`category=${category}`)) {
+                link.classList.add('active');
+            }
+        });
+
+        // Simuler le nombre de quiz disponibles (en attendant l'API)
+        const quizCounts = {
+            'html-facile': 12,
+            'html-intermediaire': 8,
+            'html-difficile': 6,
+            'html-expert': 4,
+            'css-facile': 10,
+            'css-intermediaire': 9,
+            'css-difficile': 7,
+            'css-expert': 5,
+            'js-facile': 11,
+            'js-intermediaire': 10,
+            'js-difficile': 8,
+            'js-expert': 6,
+            'react-facile': 8,
+            'react-intermediaire': 7,
+            'react-difficile': 6,
+            'react-expert': 4,
+            'java-facile': 9,
+            'java-intermediaire': 8,
+            'java-difficile': 6,
+            'java-expert': 5,
+            'sql-facile': 10,
+            'sql-intermediaire': 8,
+            'sql-difficile': 7,
+            'sql-expert': 4,
+            'php-facile': 9,
+            'php-intermediaire': 7,
+            'php-difficile': 6,
+            'php-expert': 3
+        };
+
+        const countKey = `${category}-${difficulty}`;
+        const quizCount = quizCounts[countKey] || 0;
+        document.getElementById('quizCount').textContent = quizCount;
+
+        // Base de données de quiz simulée
+        const quizDatabase = {
+            'html': {
+                'facile': [
+                    { id: 1, title: 'Introduction au HTML', questions: 10, time: 10, players: 234, description: 'Découvrez les bases du HTML et la structure d\'une page web. Parfait pour les débutants !' },
+                    { id: 2, title: 'Balises HTML de base', questions: 15, time: 12, players: 189, description: 'Testez vos connaissances sur les balises HTML les plus courantes et leur utilisation.' },
+                    { id: 3, title: 'Formulaires HTML', questions: 12, time: 15, players: 156, description: 'Apprenez à créer des formulaires HTML avec les différents types d\'inputs.' },
+                    { id: 4, title: 'Sémantique HTML5', questions: 10, time: 10, players: 198, description: 'Découvrez les balises sémantiques HTML5 pour structurer votre contenu.' }
+                ],
+                'intermediaire': [
+                    { id: 5, title: 'HTML Avancé', questions: 15, time: 18, players: 145, description: 'Approfondissez vos connaissances en HTML avec des concepts avancés.' },
+                    { id: 6, title: 'Accessibilité Web', questions: 12, time: 15, players: 123, description: 'Maîtrisez les bonnes pratiques d\'accessibilité en HTML.' }
+                ]
+            },
+            'css': {
+                'facile': [
+                    { id: 10, title: 'Introduction au CSS', questions: 10, time: 10, players: 210, description: 'Apprenez les bases du CSS pour styliser vos pages web.' },
+                    { id: 11, title: 'Sélecteurs CSS', questions: 12, time: 12, players: 187, description: 'Maîtrisez les différents types de sélecteurs CSS.' },
+                    { id: 12, title: 'Couleurs et Arrière-plans', questions: 8, time: 8, players: 165, description: 'Explorez les propriétés de couleur et d\'arrière-plan en CSS.' }
+                ],
+                'intermediaire': [
+                    { id: 13, title: 'CSS Flexbox', questions: 15, time: 18, players: 156, description: 'Maîtrisez le système de mise en page Flexbox.' },
+                    { id: 14, title: 'CSS Grid', questions: 15, time: 18, players: 142, description: 'Apprenez à créer des mises en page complexes avec CSS Grid.' },
+                    { id: 15, title: 'Animations CSS', questions: 12, time: 15, players: 134, description: 'Créez des animations fluides avec CSS.' }
+                ]
+            },
+            'js': {
+                'facile': [
+                    { id: 20, title: 'Introduction à JavaScript', questions: 10, time: 12, players: 245, description: 'Découvrez les bases de la programmation en JavaScript.' },
+                    { id: 21, title: 'Variables et Types', questions: 12, time: 15, players: 198, description: 'Apprenez à manipuler les variables et types de données.' },
+                    { id: 22, title: 'Fonctions JavaScript', questions: 10, time: 12, players: 176, description: 'Maîtrisez la création et l\'utilisation des fonctions.' }
+                ],
+                'intermediaire': [
+                    { id: 23, title: 'DOM Manipulation', questions: 15, time: 18, players: 167, description: 'Apprenez à manipuler le DOM avec JavaScript.' },
+                    { id: 24, title: 'Événements JavaScript', questions: 12, time: 15, players: 154, description: 'Gérez les interactions utilisateur avec les événements.' }
+                ],
+                'difficile': [
+                    { id: 25, title: 'JavaScript ES6+', questions: 20, time: 25, players: 145, description: 'Les fonctionnalités avancées de JavaScript ES6+.' },
+                    { id: 26, title: 'Promesses et Async/Await', questions: 18, time: 22, players: 132, description: 'Maîtrisez la programmation asynchrone en JavaScript.' }
+                ]
+            },
+            'react': {
+                'facile': [
+                    { id: 30, title: 'Introduction à React', questions: 10, time: 15, players: 189, description: 'Découvrez les concepts de base de React.' },
+                    { id: 31, title: 'Composants React', questions: 12, time: 18, players: 167, description: 'Apprenez à créer et utiliser des composants React.' }
+                ],
+                'intermediaire': [
+                    { id: 32, title: 'React Hooks', questions: 15, time: 20, players: 145, description: 'Maîtrisez les hooks useState, useEffect et autres.' },
+                    { id: 33, title: 'Props et State', questions: 12, time: 18, players: 134, description: 'Gérez les données dans vos composants React.' }
+                ]
+            },
+            'java': {
+                'facile': [
+                    { id: 40, title: 'Introduction à Java', questions: 10, time: 15, players: 156, description: 'Découvrez les bases du langage Java.' },
+                    { id: 41, title: 'Classes et Objets', questions: 12, time: 18, players: 142, description: 'Apprenez la programmation orientée objet en Java.' }
+                ],
+                'intermediaire': [
+                    { id: 42, title: 'Collections Java', questions: 15, time: 20, players: 128, description: 'Maîtrisez les collections Java (List, Set, Map).' },
+                    { id: 43, title: 'Exceptions Java', questions: 12, time: 18, players: 119, description: 'Gérez les erreurs avec les exceptions en Java.' }
+                ]
+            },
+            'sql': {
+                'facile': [
+                    { id: 50, title: 'Introduction au SQL', questions: 10, time: 12, players: 178, description: 'Apprenez les bases des requêtes SQL.' },
+                    { id: 51, title: 'SELECT et WHERE', questions: 12, time: 15, players: 165, description: 'Maîtrisez les requêtes de sélection et filtrage.' }
+                ],
+                'intermediaire': [
+                    { id: 52, title: 'Jointures SQL', questions: 15, time: 20, players: 142, description: 'Apprenez à combiner des données avec les jointures.' },
+                    { id: 53, title: 'Fonctions d\'agrégation', questions: 12, time: 18, players: 134, description: 'Utilisez COUNT, SUM, AVG et autres fonctions.' }
+                ]
+            },
+            'php': {
+                'facile': [
+                    { id: 60, title: 'Introduction au PHP', questions: 10, time: 12, players: 145, description: 'Découvrez les bases de la programmation PHP.' },
+                    { id: 61, title: 'Variables et Types PHP', questions: 12, time: 15, players: 132, description: 'Manipulez les variables et types de données en PHP.' }
+                ],
+                'intermediaire': [
+                    { id: 62, title: 'PHP POO', questions: 15, time: 20, players: 119, description: 'Apprenez la programmation orientée objet en PHP.' },
+                    { id: 63, title: 'Sessions et Cookies', questions: 12, time: 18, players: 108, description: 'Gérez les sessions utilisateur en PHP.' }
+                ]
+            }
+        };
+
+        // Fonction pour obtenir la classe de badge selon la difficulté
+        function getDifficultyBadgeClass(diff) {
+            const badges = {
+                'facile': 'badge-facile',
+                'intermediaire': 'badge-intermediaire',
+                'difficile': 'badge-difficile',
+                'expert': 'badge-expert'
+            };
+            return badges[diff] || 'badge-facile';
+        }
+
+        // Générer les cartes de quiz
+        function generateQuizCards() {
+            const container = document.getElementById('quizCardsContainer');
+            container.innerHTML = '';
+
+            // Récupérer les quiz pour la catégorie et difficulté actuelles
+            const quizzes = quizDatabase[category]?.[difficulty] || [];
+
+            if (quizzes.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                        <i class="fas fa-inbox" style="font-size: 4rem; color: var(--medium-gray); margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--text-dark); margin-bottom: 10px;">Aucun quiz disponible</h3>
+                        <p style="color: var(--medium-gray);">Il n'y a pas encore de quiz pour cette catégorie et ce niveau de difficulté.</p>
+                        <a href="quiz-category.html?category=${category}" class="btn btn-secondary" style="margin-top: 20px;">
+                            <i class="fas fa-arrow-left"></i> Choisir une autre difficulté
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Créer une carte pour chaque quiz
+            quizzes.forEach(quiz => {
+                const card = document.createElement('div');
+                card.className = 'quiz-card';
+                card.innerHTML = `
+                    <div class="quiz-header">
+                        <div>
+                            <h3 class="quiz-title">${quiz.title}</h3>
+                            <span class="quiz-badge ${getDifficultyBadgeClass(difficulty)}">${difficultyData.displayName}</span>
+                        </div>
+                    </div>
+                    <div class="quiz-meta">
+                        <span><i class="fas fa-question-circle"></i> ${quiz.questions} questions</span>
+                        <span><i class="fas fa-clock"></i> ${quiz.time} min</span>
+                        <span><i class="fas fa-users"></i> ${quiz.players} joueurs</span>
+                    </div>
+                    <p class="quiz-description">
+                        ${quiz.description}
+                    </p>
+                    <div class="quiz-actions">
+                        <a href="quiz-play.html?id=${quiz.id}" class="btn btn-secondary btn-small">
+                            <i class="fas fa-play"></i> Commencer
+                        </a>
+                        <button class="btn btn-outline btn-small" style="color: var(--text-dark); border-color: var(--medium-gray);">
+                            <i class="fas fa-info-circle"></i> Détails
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Générer les cartes au chargement
+        generateQuizCards();
+    </script>
+</body>
+</html>
+

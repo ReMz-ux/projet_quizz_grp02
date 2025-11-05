@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiques - TPN Quiz</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-section" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+                <div class="logo">
+                    <img src="assets/images/Logo_quizz.png" alt="TPN Quiz Logo" class="logo-img">
+                </div>
+                <div>
+                    <div class="site-title">Team Pole numérique</div>
+                    <div class="site-subtitle">TPN Quiz</div>
+                </div>
+            </a>
+
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Taper votre recherche">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="auth-buttons">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>stagiaire 11</span>
+                </div>
+                <button class="btn btn-outline" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" style="min-height: calc(100vh - 350px); padding: 40px; max-width: 1400px; margin: 0 auto;">
+        <!-- Breadcrumb -->
+        <div style="margin-bottom: 20px;">
+            <a href="student-dashboard.html" style="color: var(--primary-blue); text-decoration: none;">
+                <i class="fas fa-home"></i> Tableau de bord
+            </a>
+            <span style="margin: 0 10px; color: var(--medium-gray);">/</span>
+            <span style="color: var(--medium-gray);">Statistiques</span>
+        </div>
+
+        <!-- Page Title -->
+        <h1 style="color: var(--text-dark); margin-bottom: 30px;">
+            <i class="fas fa-chart-bar"></i> Mes Statistiques
+        </h1>
+
+        <!-- Stats Overview -->
+        <div class="dashboard-grid" style="margin-bottom: 40px;">
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>24</h3>
+                    <p>Quiz complétés</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>85%</h3>
+                    <p>Taux de réussite</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon yellow">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>6h 45m</h3>
+                    <p>Temps total</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon red">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>12</h3>
+                    <p>Badges obtenus</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress by Category -->
+        <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); margin-bottom: 30px;">
+            <h2 style="margin-bottom: 25px; color: var(--text-dark);">
+                <i class="fas fa-chart-line"></i> Progression par catégorie
+            </h2>
+
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <!-- HTML Progress -->
+                <div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span><i class="fab fa-html5" style="color: #e74c3c;"></i> <strong>HTML</strong></span>
+                        <span style="color: var(--medium-gray);">8/10 quiz complétés (90% réussite)</span>
+                    </div>
+                    <div style="height: 20px; background: var(--light-gray); border-radius: 10px; overflow: hidden;">
+                        <div style="height: 100%; width: 80%; background: linear-gradient(90deg, #e74c3c, #c0392b); display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: white; font-size: 0.85rem; font-weight: bold;">80%</div>
+                    </div>
+                </div>
+
+                <!-- CSS Progress -->
+                <div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span><i class="fab fa-css3-alt" style="color: #3498db;"></i> <strong>CSS</strong></span>
+                        <span style="color: var(--medium-gray);">6/12 quiz complétés (87% réussite)</span>
+                    </div>
+                    <div style="height: 20px; background: var(--light-gray); border-radius: 10px; overflow: hidden;">
+                        <div style="height: 100%; width: 50%; background: linear-gradient(90deg, #3498db, #2980b9); display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: white; font-size: 0.85rem; font-weight: bold;">50%</div>
+                    </div>
+                </div>
+
+                <!-- JavaScript Progress -->
+                <div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span><i class="fab fa-js" style="color: #f1c40f;"></i> <strong>JavaScript</strong></span>
+                        <span style="color: var(--medium-gray);">7/15 quiz complétés (82% réussite)</span>
+                    </div>
+                    <div style="height: 20px; background: var(--light-gray); border-radius: 10px; overflow: hidden;">
+                        <div style="height: 100%; width: 47%; background: linear-gradient(90deg, #f1c40f, #f39c12); display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: white; font-size: 0.85rem; font-weight: bold;">47%</div>
+                    </div>
+                </div>
+
+                <!-- React Progress -->
+                <div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span><i class="fab fa-react" style="color: #61dafb;"></i> <strong>React</strong></span>
+                        <span style="color: var(--medium-gray);">3/10 quiz complétés (75% réussite)</span>
+                    </div>
+                    <div style="height: 20px; background: var(--light-gray); border-radius: 10px; overflow: hidden;">
+                        <div style="height: 100%; width: 30%; background: linear-gradient(90deg, #61dafb, #21a1f1); display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: white; font-size: 0.85rem; font-weight: bold;">30%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Results -->
+        <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); margin-bottom: 30px;">
+            <h2 style="margin-bottom: 25px; color: var(--text-dark);">
+                <i class="fas fa-history"></i> Résultats récents
+            </h2>
+
+            <div class="table-container" style="padding: 0; box-shadow: none;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Quiz</th>
+                            <th>Catégorie</th>
+                            <th>Difficulté</th>
+                            <th>Score</th>
+                            <th>Temps</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Introduction au HTML</strong></td>
+                            <td><span style="color: #e74c3c;"><i class="fab fa-html5"></i> HTML</span></td>
+                            <td><span class="quiz-badge badge-facile">Facile</span></td>
+                            <td><span style="color: var(--success); font-weight: bold;">90%</span></td>
+                            <td>8m 32s</td>
+                            <td>03/11/2024</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CSS Flexbox</strong></td>
+                            <td><span style="color: #3498db;"><i class="fab fa-css3-alt"></i> CSS</span></td>
+                            <td><span class="quiz-badge badge-intermediaire">Intermédiaire</span></td>
+                            <td><span style="color: var(--warning); font-weight: bold;">75%</span></td>
+                            <td>12m 15s</td>
+                            <td>02/11/2024</td>
+                        </tr>
+                        <tr>
+                            <td><strong>JavaScript ES6+</strong></td>
+                            <td><span style="color: #f1c40f;"><i class="fab fa-js"></i> JavaScript</span></td>
+                            <td><span class="quiz-badge badge-difficile">Difficile</span></td>
+                            <td><span style="color: var(--success); font-weight: bold;">88%</span></td>
+                            <td>18m 45s</td>
+                            <td>01/11/2024</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Balises HTML</strong></td>
+                            <td><span style="color: #e74c3c;"><i class="fab fa-html5"></i> HTML</span></td>
+                            <td><span class="quiz-badge badge-facile">Facile</span></td>
+                            <td><span style="color: var(--success); font-weight: bold;">95%</span></td>
+                            <td>10m 20s</td>
+                            <td>31/10/2024</td>
+                        </tr>
+                        <tr>
+                            <td><strong>React Hooks</strong></td>
+                            <td><span style="color: #61dafb;"><i class="fab fa-react"></i> React</span></td>
+                            <td><span class="quiz-badge badge-difficile">Difficile</span></td>
+                            <td><span style="color: var(--red); font-weight: bold;">60%</span></td>
+                            <td>20m 10s</td>
+                            <td>30/10/2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Badges -->
+        <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
+            <h2 style="margin-bottom: 25px; color: var(--text-dark);">
+                <i class="fas fa-award"></i> Badges obtenus
+            </h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px;">
+                <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 10px;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">🏆</div>
+                    <strong>Premier Quiz</strong>
+                    <p style="color: var(--medium-gray); font-size: 0.85rem; margin-top: 5px;">Complété votre premier quiz</p>
+                </div>
+
+                <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 10px;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">⭐</div>
+                    <strong>Score Parfait</strong>
+                    <p style="color: var(--medium-gray); font-size: 0.85rem; margin-top: 5px;">Obtenu 100% à un quiz</p>
+                </div>
+
+                <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 10px;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">🔥</div>
+                    <strong>En Feu</strong>
+                    <p style="color: var(--medium-gray); font-size: 0.85rem; margin-top: 5px;">7 jours consécutifs</p>
+                </div>
+
+                <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 10px;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">📚</div>
+                    <strong>Dévoreur</strong>
+                    <p style="color: var(--medium-gray); font-size: 0.85rem; margin-top: 5px;">Complété 20 quiz</p>
+                </div>
+
+                <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 10px;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">💯</div>
+                    <strong>Expert HTML</strong>
+                    <p style="color: var(--medium-gray); font-size: 0.85rem; margin-top: 5px;">Tous les quiz HTML réussis</p>
+                </div>
+
+                <div style="text-align: center; padding: 20px; background: var(--light-gray); border-radius: 10px;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">⚡</div>
+                    <strong>Rapide</strong>
+                    <p style="color: var(--medium-gray); font-size: 0.85rem; margin-top: 5px;">Complété un quiz en moins de 5 min</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Retrouvez nous sur les réseaux</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quizz et jeux</h3>
+                <ul>
+                    <li><a href="#">Nouveautés</a></li>
+                    <li><a href="#">Popularités</a></li>
+                    <li><a href="#">Tout les quizz</a></li>
+                    <li><a href="#">Le défiez-vous ?</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informations</h3>
+                <ul>
+                    <li><a href="#">À Propos</a></li>
+                    <li><a href="#">Foire Aux Questions (FAQ)</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Mentions légales | Confidentialités | C & V</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
+

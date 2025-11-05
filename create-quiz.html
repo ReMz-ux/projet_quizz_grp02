@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Quiz - TPN Quiz</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-section" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+                <div class="logo">
+                    <img src="assets/images/Logo_quizz.png" alt="TPN Quiz Logo" class="logo-img">
+                </div>
+                <div>
+                    <div class="site-title">Team Pole numérique</div>
+                    <div class="site-subtitle">TPN Quiz</div>
+                </div>
+            </a>
+
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Taper votre recherche">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="auth-buttons">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <span>formateur 31</span>
+                </div>
+                <button class="btn btn-outline" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" style="min-height: calc(100vh - 350px); padding: 40px; max-width: 1000px; margin: 0 auto;">
+        <!-- Breadcrumb -->
+        <div style="margin-bottom: 20px;">
+            <a href="trainer-dashboard.html" style="color: var(--primary-blue); text-decoration: none;">
+                <i class="fas fa-home"></i> Espace formateur
+            </a>
+            <span style="margin: 0 10px; color: var(--medium-gray);">/</span>
+            <a href="manage-quizzes.html" style="color: var(--primary-blue); text-decoration: none;">
+                Gérer les quizz
+            </a>
+            <span style="margin: 0 10px; color: var(--medium-gray);">/</span>
+            <span style="color: var(--medium-gray);">Créer un quiz</span>
+        </div>
+
+        <!-- Page Title -->
+        <h1 style="color: var(--text-dark); margin-bottom: 30px;">
+            <i class="fas fa-plus-circle"></i> Créer un nouveau quiz
+        </h1>
+
+        <!-- Quiz Form -->
+        <form id="createQuizForm">
+            <!-- Quiz Information -->
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); margin-bottom: 30px;">
+                <h2 style="margin-bottom: 20px; color: var(--text-dark);">
+                    <i class="fas fa-info-circle"></i> Informations du quiz
+                </h2>
+
+                <div class="form-group">
+                    <label for="quizTitle"><i class="fas fa-heading"></i> Titre du quiz *</label>
+                    <input type="text" id="quizTitle" name="quizTitle" required placeholder="Ex: Les bases du HTML">
+                </div>
+
+                <div class="form-group">
+                    <label for="quizDescription"><i class="fas fa-align-left"></i> Description *</label>
+                    <textarea id="quizDescription" name="quizDescription" required placeholder="Décrivez le contenu et les objectifs de ce quiz..."></textarea>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label for="quizCategory"><i class="fas fa-folder"></i> Catégorie *</label>
+                        <select id="quizCategory" name="quizCategory" required>
+                            <option value="">-- Sélectionner une catégorie --</option>
+                            <option value="html">HTML</option>
+                            <option value="css">CSS</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="react">React</option>
+                            <option value="java">Java</option>
+                            <option value="sql">SQL</option>
+                            <option value="php">PHP</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quizDifficulty"><i class="fas fa-signal"></i> Difficulté *</label>
+                        <select id="quizDifficulty" name="quizDifficulty" required>
+                            <option value="">-- Sélectionner une difficulté --</option>
+                            <option value="facile">Facile</option>
+                            <option value="intermediaire">Intermédiaire</option>
+                            <option value="difficile">Difficile</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label for="quizDuration"><i class="fas fa-clock"></i> Durée estimée (minutes) *</label>
+                        <input type="number" id="quizDuration" name="quizDuration" required min="1" placeholder="Ex: 15">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quizPassScore"><i class="fas fa-percent"></i> Score de réussite (%) *</label>
+                        <input type="number" id="quizPassScore" name="quizPassScore" required min="0" max="100" value="70" placeholder="Ex: 70">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions Section -->
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); margin-bottom: 30px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2 style="color: var(--text-dark); margin: 0;">
+                        <i class="fas fa-question-circle"></i> Questions
+                    </h2>
+                    <button type="button" class="btn btn-success" onclick="addQuestion()">
+                        <i class="fas fa-plus"></i> Ajouter une question
+                    </button>
+                </div>
+
+                <div id="questionsContainer">
+                    <!-- Question 1 (Template) -->
+                    <div class="question-block" style="background: var(--light-gray); padding: 25px; border-radius: 10px; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h3 style="color: var(--text-dark); margin: 0;">
+                                <i class="fas fa-question"></i> Question 1
+                            </h3>
+                            <button type="button" class="btn btn-confirm btn-small" onclick="removeQuestion(this)">
+                                <i class="fas fa-trash"></i> Supprimer
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-align-left"></i> Texte de la question *</label>
+                            <textarea name="question_text[]" required placeholder="Entrez votre question ici..."></textarea>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600;">
+                                <i class="fas fa-list"></i> Réponses
+                            </label>
+
+                            <div class="answer-item" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                                <input type="radio" name="correct_answer_1" value="0" required>
+                                <input type="text" name="answer_1[]" placeholder="Réponse A" required style="flex: 1; padding: 10px; border: 2px solid var(--light-gray); border-radius: 8px;">
+                            </div>
+
+                            <div class="answer-item" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                                <input type="radio" name="correct_answer_1" value="1" required>
+                                <input type="text" name="answer_1[]" placeholder="Réponse B" required style="flex: 1; padding: 10px; border: 2px solid var(--light-gray); border-radius: 8px;">
+                            </div>
+
+                            <div class="answer-item" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                                <input type="radio" name="correct_answer_1" value="2" required>
+                                <input type="text" name="answer_1[]" placeholder="Réponse C" required style="flex: 1; padding: 10px; border: 2px solid var(--light-gray); border-radius: 8px;">
+                            </div>
+
+                            <div class="answer-item" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                                <input type="radio" name="correct_answer_1" value="3" required>
+                                <input type="text" name="answer_1[]" placeholder="Réponse D" required style="flex: 1; padding: 10px; border: 2px solid var(--light-gray); border-radius: 8px;">
+                            </div>
+
+                            <p style="color: var(--medium-gray); font-size: 0.9rem; margin-top: 10px;">
+                                <i class="fas fa-info-circle"></i> Cochez la radio pour indiquer la bonne réponse
+                            </p>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label><i class="fas fa-comment"></i> Explication (optionnel)</label>
+                            <textarea name="question_explanation[]" placeholder="Expliquez pourquoi cette réponse est correcte..." style="min-height: 80px;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button type="submit" class="btn btn-success" style="min-width: 200px;">
+                    <i class="fas fa-save"></i> Créer le quiz
+                </button>
+                <button type="button" class="btn btn-outline" style="color: var(--text-dark); border-color: var(--medium-gray); min-width: 200px;" onclick="saveDraft()">
+                    <i class="fas fa-file"></i> Enregistrer comme brouillon
+                </button>
+                <button type="button" class="btn btn-outline" style="color: var(--text-dark); border-color: var(--medium-gray);" onclick="window.history.back()">
+                    <i class="fas fa-times"></i> Annuler
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Retrouvez nous sur les réseaux</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quizz et jeux</h3>
+                <ul>
+                    <li><a href="#">Nouveautés</a></li>
+                    <li><a href="#">Popularités</a></li>
+                    <li><a href="#">Tout les quizz</a></li>
+                    <li><a href="#">Le défiez-vous ?</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Informations</h3>
+                <ul>
+                    <li><a href="#">À Propos</a></li>
+                    <li><a href="#">Foire Aux Questions (FAQ)</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Mentions légales | Confidentialités | C & V</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        let questionCount = 1;
+
+        function addQuestion() {
+            questionCount++;
+            const container = document.getElementById('questionsContainer');
+            
+            const questionBlock = document.createElement('div');
+            questionBlock.className = 'question-block';
+            questionBlock.style.cssText = 'background: var(--light-gray); padding: 25px; border-radius: 10px; margin-bottom: 20px;';
+            
+            questionBlock.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="color: var(--text-dark); margin: 0;">
+                        <i class="fas fa-question"></i> Question ${questionCount}
+                    </h3>
+                    <button type="button" class="btn btn-confirm btn-small" onclick="removeQuestion(this)">
+                        <i class="fas fa-trash"></i> Supprimer
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-align-left"></i> Texte de la question *</label>
+                    <textarea name="question_text[]" required placeholder="Entrez votre question ici..."></textarea>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 600;">
+                        <i class="fas fa-list"></i> Réponses
+                    </label>
+
+                    <div class="answer-item" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                        <input type="radio" name="correct_answer_${questionCount}" value="0" required>
+                        <input type="text" name="answer_${questionCount}[]" placeholder="Réponse A" required style="flex: 1; padding: 10px; border: 2px solid var(--light-gray); border-radius: 8px;">
+                    </div>
+
+                    <div class="answer-item" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                        <input type="radio" name="correct_answer_${questionCount}" value="1" required>
+                        <input type="text" name="answer_${questionCount}[]" placeholder="Réponse B" required style="flex: 1; padding: 10px; border: 2px solid var(--light-gray); border-radius: 8px;">
+                    </div>
+
+                    <div class="answer-item" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                        <input type="radio" name="correct_answer_${questionCount}" value="2" required>
+                        <input type="text" name="answer_${questionCount}[]" placeholder="Réponse C" required style="flex: 1; padding: 10px; border: 2px solid var(--light-gray); border-radius: 8px;">
+                    </div>
+
+                    <div class="answer-item" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                        <input type="radio" name="correct_answer_${questionCount}" value="3" required>
+                        <input type="text" name="answer_${questionCount}[]" placeholder="Réponse D" required style="flex: 1; padding: 10px; border: 2px solid var(--light-gray); border-radius: 8px;">
+                    </div>
+
+                    <p style="color: var(--medium-gray); font-size: 0.9rem; margin-top: 10px;">
+                        <i class="fas fa-info-circle"></i> Cochez la radio pour indiquer la bonne réponse
+                    </p>
+                </div>
+
+                <div class="form-group" style="margin-top: 15px;">
+                    <label><i class="fas fa-comment"></i> Explication (optionnel)</label>
+                    <textarea name="question_explanation[]" placeholder="Expliquez pourquoi cette réponse est correcte..." style="min-height: 80px;"></textarea>
+                </div>
+            `;
+            
+            container.appendChild(questionBlock);
+            showToast('Question ajoutée', 'success');
+        }
+
+        function removeQuestion(button) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette question ?')) {
+                const questionBlock = button.closest('.question-block');
+                questionBlock.remove();
+                showToast('Question supprimée', 'success');
+                
+                // Renumber questions
+                const questions = document.querySelectorAll('.question-block');
+                questions.forEach((q, index) => {
+                    q.querySelector('h3').innerHTML = `<i class="fas fa-question"></i> Question ${index + 1}`;
+                });
+                questionCount = questions.length;
+            }
+        }
+
+        function saveDraft() {
+            showToast('Quiz enregistré comme brouillon', 'success');
+            setTimeout(() => {
+                window.location.href = 'manage-quizzes.html';
+            }, 1500);
+        }
+
+        // Handle form submission
+        document.getElementById('createQuizForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const quizData = {
+                title: formData.get('quizTitle'),
+                description: formData.get('quizDescription'),
+                category: formData.get('quizCategory'),
+                difficulty: formData.get('quizDifficulty'),
+                duration: formData.get('quizDuration'),
+                passScore: formData.get('quizPassScore'),
+                questions: []
+            };
+            
+            console.log('Quiz data:', quizData);
+            
+            showToast('Création du quiz en cours...', 'info');
+            
+            setTimeout(() => {
+                showToast('Quiz créé avec succès !', 'success');
+                setTimeout(() => {
+                    window.location.href = 'manage-quizzes.html';
+                }, 1500);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
+
