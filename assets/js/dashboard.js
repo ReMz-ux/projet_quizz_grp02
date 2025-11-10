@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Mettre à jour l'interface avec les infos utilisateur
     updateUserInterface(user);
     
-    // Charger les quiz depuis l'API
-    await loadQuizzes();
+    // Charger les quiz (version simulée pour le développement)
+    loadMockQuizzes();
     
     // Charger les catégories
     await loadCategories();
@@ -76,9 +76,95 @@ function updateUserInterface(user) {
 // ===== QUIZ LOADING =====
 
 /**
- * Charge tous les quiz depuis l'API
+ * Charge les quiz simulés (pour le développement)
  */
-async function loadQuizzes() {
+function loadMockQuizzes() {
+    console.log('Chargement des quiz simulés...');
+    
+    // Quiz simulés avec différentes catégories et difficultés
+    const mockQuizzes = [
+        {
+            id: 1,
+            title: 'Les bases du HTML',
+            description: 'Testez vos connaissances sur les bases du HTML5',
+            difficulty: 'facile',
+            categories: [{ id: 1, title: 'HTML' }],
+            questions: Array(10).fill(null).map((_, i) => ({ id: i + 1 }))
+        },
+        {
+            id: 2,
+            title: 'CSS Flexbox',
+            description: 'Maîtrisez le système de mise en page Flexbox',
+            difficulty: 'intermediaire',
+            categories: [{ id: 2, title: 'CSS' }],
+            questions: Array(15).fill(null).map((_, i) => ({ id: i + 1 }))
+        },
+        {
+            id: 3,
+            title: 'JavaScript ES6+',
+            description: 'Les fonctionnalités avancées de JavaScript ES6+',
+            difficulty: 'difficile',
+            categories: [{ id: 3, title: 'JavaScript' }],
+            questions: Array(20).fill(null).map((_, i) => ({ id: i + 1 }))
+        },
+        {
+            id: 4,
+            title: 'HTML Sémantique',
+            description: 'Apprenez à utiliser les balises sémantiques HTML5',
+            difficulty: 'facile',
+            categories: [{ id: 1, title: 'HTML' }],
+            questions: Array(12).fill(null).map((_, i) => ({ id: i + 1 }))
+        },
+        {
+            id: 5,
+            title: 'CSS Grid Layout',
+            description: 'Créez des mises en page complexes avec CSS Grid',
+            difficulty: 'intermediaire',
+            categories: [{ id: 2, title: 'CSS' }],
+            questions: Array(15).fill(null).map((_, i) => ({ id: i + 1 }))
+        },
+        {
+            id: 6,
+            title: 'React Hooks',
+            description: 'Maîtrisez les hooks useState, useEffect et autres',
+            difficulty: 'difficile',
+            categories: [{ id: 4, title: 'React' }],
+            questions: Array(18).fill(null).map((_, i) => ({ id: i + 1 }))
+        },
+        {
+            id: 7,
+            title: 'SQL de base',
+            description: 'Apprenez les requêtes SQL fondamentales',
+            difficulty: 'facile',
+            categories: [{ id: 5, title: 'SQL' }],
+            questions: Array(10).fill(null).map((_, i) => ({ id: i + 1 }))
+        },
+        {
+            id: 8,
+            title: 'PHP POO',
+            description: 'Programmation orientée objet en PHP',
+            difficulty: 'intermediaire',
+            categories: [{ id: 6, title: 'PHP' }],
+            questions: Array(15).fill(null).map((_, i) => ({ id: i + 1 }))
+        },
+        {
+            id: 9,
+            title: 'Java Avancé',
+            description: 'Concepts avancés de Java et design patterns',
+            difficulty: 'difficile',
+            categories: [{ id: 7, title: 'Java' }],
+            questions: Array(20).fill(null).map((_, i) => ({ id: i + 1 }))
+        }
+    ];
+    
+    displayQuizzes(mockQuizzes);
+    console.log('Quiz simulés chargés:', mockQuizzes);
+}
+
+/**
+ * Charge tous les quiz depuis l'API (désactivé pour l'instant)
+ */
+async function loadQuizzesFromAPI() {
     try {
         showToast('Chargement des quiz...', 'info');
         
@@ -136,10 +222,16 @@ function createQuizCard(quiz) {
     const card = document.createElement('div');
     card.className = 'quiz-card';
     
-    // Déterminer le niveau de difficulté (peut être ajouté plus tard dans l'API)
-    const difficulty = 'facile'; // Par défaut
+    // Déterminer le niveau de difficulté
+    const difficulty = quiz.difficulty || 'facile';
     const difficultyClass = `badge-${difficulty}`;
-    const difficultyName = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+    const difficultyNames = {
+        'facile': 'Facile',
+        'intermediaire': 'Intermédiaire',
+        'difficile': 'Difficile',
+        'expert': 'Expert'
+    };
+    const difficultyName = difficultyNames[difficulty] || 'Facile';
     
     // Calculer le nombre de questions
     const questionCount = quiz.questions ? quiz.questions.length : 0;
@@ -149,6 +241,9 @@ function createQuizCard(quiz) {
     
     // Obtenir les catégories
     const categories = quiz.categories ? quiz.categories.map(cat => cat.title).join(', ') : 'Non catégorisé';
+    
+    // Nombre de joueurs simulé
+    const players = Math.floor(Math.random() * 200) + 50;
     
     card.innerHTML = `
         <div class="quiz-header">
@@ -160,7 +255,7 @@ function createQuizCard(quiz) {
         <div class="quiz-meta">
             <span><i class="fas fa-question-circle"></i> ${questionCount} questions</span>
             <span><i class="fas fa-clock"></i> ${estimatedTime} min</span>
-            <span><i class="fas fa-tag"></i> ${categories}</span>
+            <span><i class="fas fa-users"></i> ${players} joueurs</span>
         </div>
         <p class="quiz-description">
             ${quiz.description || 'Aucune description disponible'}
