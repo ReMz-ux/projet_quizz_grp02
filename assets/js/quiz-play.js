@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
     
+    // Mettre à jour le nom de l'utilisateur dans le header
+    const userNameElement = document.getElementById('currentUserName');
+    if (userNameElement && user.firstname && user.lastname) {
+        userNameElement.textContent = `${user.firstname} ${user.lastname}`;
+    }
+    
     // Récupérer l'ID du quiz depuis l'URL
     const urlParams = new URLSearchParams(window.location.search);
     const quizId = urlParams.get('id');

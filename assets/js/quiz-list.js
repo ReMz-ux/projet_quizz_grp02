@@ -23,6 +23,15 @@ const difficulties = {
 // ===== INITIALIZATION =====
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // Mettre à jour le nom de l'utilisateur dans le header
+    const user = API.getUser();
+    if (user) {
+        const userNameElement = document.getElementById('currentUserName');
+        if (userNameElement && user.firstname && user.lastname) {
+            userNameElement.textContent = `${user.firstname} ${user.lastname}`;
+        }
+    }
+    
     // Récupérer les paramètres URL
     const urlParams = new URLSearchParams(window.location.search);
     const category = urlParams.get('category') || 'html';

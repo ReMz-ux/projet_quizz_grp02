@@ -31,16 +31,36 @@ document.addEventListener('DOMContentLoaded', async () => {
  * Met à jour l'interface avec les informations de l'utilisateur
  */
 function updateUserInterface(user) {
+    const fullName = `${user.firstname} ${user.lastname}`;
+    
     // Mettre à jour le nom d'utilisateur dans le header
     const userNameElements = document.querySelectorAll('.user-info span');
     userNameElements.forEach(element => {
-        element.textContent = `${user.firstname} ${user.lastname}`;
+        element.textContent = fullName;
     });
     
     // Mettre à jour le nom dans le profil
     const profileNameElements = document.querySelectorAll('.profile-info h2');
     profileNameElements.forEach(element => {
-        element.textContent = `${user.firstname} ${user.lastname}`;
+        element.textContent = fullName;
+    });
+    
+    // Mettre à jour tous les endroits avec "stagiaire XX" ou "formateur XX"
+    document.querySelectorAll('*').forEach(element => {
+        // Ne traiter que les nœuds texte
+        element.childNodes.forEach(node => {
+            if (node.nodeType === 3) { // Text node
+                const text = node.textContent;
+                // Remplacer "stagiaire XX" par le vrai nom
+                if (text.match(/stagiaire \d+/i)) {
+                    node.textContent = text.replace(/stagiaire \d+/i, fullName);
+                }
+                // Remplacer "formateur XX" par le vrai nom
+                if (text.match(/formateur \d+/i)) {
+                    node.textContent = text.replace(/formateur \d+/i, fullName);
+                }
+            }
+        });
     });
     
     // Mettre à jour l'email dans l'alerte
@@ -48,7 +68,7 @@ function updateUserInterface(user) {
     alertElements.forEach(element => {
         if (element.textContent.includes('connecté')) {
             const userType = user.type === 'stagiaire' ? 'stagiaire' : 'formateur';
-            element.textContent = `vous êtes connecté en tant que ${userType} : ${user.firstname} ${user.lastname}`;
+            element.textContent = `vous êtes connecté en tant que ${userType} : ${fullName}`;
         }
     });
 }
