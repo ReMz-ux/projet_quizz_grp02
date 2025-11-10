@@ -1,8 +1,5 @@
 // ===== TPN QUIZ - JavaScript =====
 
-// Configuration
-const API_URL = 'http://localhost:3000/api'; // À remplacer par l'URL de votre API
-
 // ===== UTILITY FUNCTIONS =====
 
 // Show toast notification
@@ -76,45 +73,42 @@ if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const formData = {
-            email: document.getElementById('email').value,
-            password: document.getElementById('password').value,
-            userType: document.getElementById('userType').value
-        };
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const userType = document.getElementById('userType').value;
         
-        if (!formData.userType) {
+        if (!userType) {
             showToast('Veuillez sélectionner un type d\'utilisateur', 'error');
             return;
         }
         
         try {
-            // Simulation de connexion (à remplacer par un vrai appel API)
             showToast('Connexion en cours...', 'info');
             
-            // Simuler un délai d'API
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Appel à l'API réelle
+            const result = await API.login(email, password);
             
-            // Stocker les informations utilisateur
-            const userData = {
-                id: Math.floor(Math.random() * 100),
-                email: formData.email,
-                type: formData.userType,
-                name: formData.userType === 'stagiaire' ? 'stagiaire 31' : 'formateur 31'
-            };
-            
-            localStorage.setItem('tpn_user', JSON.stringify(userData));
-            localStorage.setItem('tpn_token', 'fake_token_' + Date.now());
-            
-            showToast('Connexion réussie !', 'success');
-            
-            // Rediriger vers le dashboard approprié
-            setTimeout(() => {
-                if (formData.userType === 'stagiaire') {
-                    window.location.href = 'student-dashboard.html';
-                } else {
-                    window.location.href = 'trainer-dashboard.html';
-                }
-            }, 1000);
+            if (result.success && result.user) {
+                // Stocker le type d'utilisateur choisi
+                const userData = {
+                    ...result.user,
+                    type: userType
+                };
+                API.setUser(userData);
+                
+                showToast('Connexion réussie !', 'success');
+                
+                // Rediriger vers le dashboard approprié
+                setTimeout(() => {
+                    if (userType === 'stagiaire') {
+                        window.location.href = 'student-dashboard.html';
+                    } else {
+                        window.location.href = 'trainer-dashboard.html';
+                    }
+                }, 1000);
+            } else {
+                showToast(result.error || 'Erreur de connexion. Vérifiez vos identifiants.', 'error');
+            }
             
         } catch (error) {
             console.error('Login error:', error);
@@ -129,27 +123,25 @@ if (registerForm) {
     registerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const formData = {
-            nom: document.getElementById('nom').value,
-            prenom: document.getElementById('prenom').value,
-            email: document.getElementById('email').value,
-            password: document.getElementById('password').value,
-            confirmPassword: document.getElementById('confirmPassword').value,
-            userType: document.getElementById('userType').value
-        };
+        const nom = document.getElementById('nom').value;
+        const prenom = document.getElementById('prenom').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const userType = document.getElementById('userType').value;
         
         // Validation
-        if (formData.password !== formData.confirmPassword) {
+        if (password !== confirmPassword) {
             showToast('Les mots de passe ne correspondent pas', 'error');
             return;
         }
         
-        if (formData.password.length < 6) {
+        if (password.length < 6) {
             showToast('Le mot de passe doit contenir au moins 6 caractères', 'error');
             return;
         }
         
-        if (!formData.userType) {
+        if (!userType) {
             showToast('Veuillez sélectionner un type d\'utilisateur', 'error');
             return;
         }
@@ -157,14 +149,26 @@ if (registerForm) {
         try {
             showToast('Création du compte...', 'info');
             
-            // Simuler un délai d'API
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Préparer les données selon le format de l'API
+            const userData = {
+                firstname: prenom,
+                lastname: nom,
+                email: email,
+                password: password
+            };
             
-            showToast('Compte créé avec succès ! Vous pouvez maintenant vous connecter.', 'success');
+            // Appel à l'API réelle
+            const result = await API.register(userData);
             
-            setTimeout(() => {
-                window.location.href = 'login.html';
-            }, 2000);
+            if (result.success) {
+                showToast('Compte créé avec succès ! Vous pouvez maintenant vous connecter.', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+            } else {
+                showToast(result.error || 'Erreur lors de la création du compte.', 'error');
+            }
             
         } catch (error) {
             console.error('Registration error:', error);

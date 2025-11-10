@@ -158,57 +158,9 @@
         </div>
     </footer>
 
+    <script src="assets/js/api.js"></script>
     <script src="assets/js/script.js"></script>
-    <script>
-        // Simple quiz interaction functions
-        function selectAnswer(element) {
-            // Remove selected class from all options
-            document.querySelectorAll('.answer-option').forEach(option => {
-                option.classList.remove('selected');
-            });
-            
-            // Add selected class to clicked option
-            element.classList.add('selected');
-            
-            // Check the radio button
-            element.querySelector('input[type="radio"]').checked = true;
-        }
-
-        function previousQuestion() {
-            // Logic to go to previous question
-            alert('Retour à la question précédente (à implémenter avec l\'API)');
-        }
-
-        function nextQuestion() {
-            const selected = document.querySelector('input[name="answer"]:checked');
-            if (!selected) {
-                alert('Veuillez sélectionner une réponse');
-                return;
-            }
-            
-            // Logic to go to next question or submit quiz
-            alert('Passage à la question suivante (à implémenter avec l\'API)');
-            // window.location.href = 'quiz-results.html?id=1';
-        }
-
-        // Timer countdown (example)
-        let timeLeft = 465; // 7:45 in seconds
-        function updateTimer() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            document.getElementById('timer').textContent = 
-                `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            
-            if (timeLeft > 0) {
-                timeLeft--;
-            } else {
-                alert('Temps écoulé !');
-                // Auto-submit quiz
-            }
-        }
-        
-        setInterval(updateTimer, 1000);
-    </script>
+    <script src="assets/js/quiz-play.js"></script>
 </body>
 </html>
 

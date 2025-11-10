@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API - TPN Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+        
+        .test-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .test-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .test-section h3 {
+            color: #333;
+            margin: 15px 0 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .result {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .result pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.9rem;
+        }
+        
+        .success {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .error {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-left: 4px solid #2196F3;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        
+        input {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin: 5px;
+            width: 250px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+        
+        .status-connected {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-disconnected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test API - TPN Quiz</h1>
+        
+        <!-- Status -->
+        <div class="test-section">
+            <h2>📊 Status de Connexion</h2>
+            <div class="info">
+                <strong>API URL:</strong> https://quizz.adrardev.fr<br>
+                <strong>Status:</strong> <span id="connectionStatus" class="status-badge status-disconnected">Non connecté</span><br>
+                <strong>Token:</strong> <span id="tokenStatus">Aucun</span>
+            </div>
+        </div>
+        
+        <!-- Authentification -->
+        <div class="test-section">
+            <h2>🔐 Test d'Authentification</h2>
+            
+            <h3>1. Connexion (Compte du prof)</h3>
+            <input type="email" id="loginEmail" value="adm@test.com" placeholder="Email">
+            <input type="password" id="loginPassword" value="password" placeholder="Mot de passe">
+            <button onclick="testLogin()">🔑 Se connecter</button>
+            <div id="loginResult" class="result" style="display:none;"></div>
+            
+            <h3>2. Récupérer Infos Utilisateur (nécessite connexion)</h3>
+            <button onclick="testGetMe()">👤 Récupérer mes infos</button>
+            <div id="getMeResult" class="result" style="display:none;"></div>
+            
+            <h3>3. Inscription (Nouveau compte)</h3>
+            <input type="text" id="registerFirstname" placeholder="Prénom" value="Test">
+            <input type="text" id="registerLastname" placeholder="Nom" value="User">
+            <input type="email" id="registerEmail" placeholder="Email" value="test@test.fr">
+            <input type="password" id="registerPassword" placeholder="Mot de passe" value="password123">
+            <button onclick="testRegister()">📝 S'inscrire</button>
+            <div id="registerResult" class="result" style="display:none;"></div>
+        </div>
+        
+        <!-- Quiz -->
+        <div class="test-section">
+            <h2>📚 Test des Quiz</h2>
+            
+            <h3>1. Récupérer tous les quiz</h3>
+            <button onclick="testGetQuizzes()">📋 Charger les quiz</button>
+            <div id="quizzesResult" class="result" style="display:none;"></div>
+            
+            <h3>2. Récupérer un quiz spécifique</h3>
+            <input type="number" id="quizId" placeholder="ID du quiz" value="1">
+            <button onclick="testGetQuiz()">🔍 Charger le quiz</button>
+            <div id="quizResult" class="result" style="display:none;"></div>
+        </div>
+        
+        <!-- Catégories -->
+        <div class="test-section">
+            <h2>🏷️ Test des Catégories</h2>
+            
+            <h3>1. Récupérer toutes les catégories</h3>
+            <button onclick="testGetCategories()">📁 Charger les catégories</button>
+            <div id="categoriesResult" class="result" style="display:none;"></div>
+        </div>
+        
+        <!-- Questions -->
+        <div class="test-section">
+            <h2>❓ Test des Questions</h2>
+            
+            <h3>1. Récupérer toutes les questions</h3>
+            <button onclick="testGetQuestions()">📝 Charger les questions</button>
+            <div id="questionsResult" class="result" style="display:none;"></div>
+        </div>
+        
+        <!-- Utilisateurs -->
+        <div class="test-section">
+            <h2>👥 Test des Utilisateurs</h2>
+            
+            <h3>1. Récupérer tous les utilisateurs (nécessite authentification)</h3>
+            <button onclick="testGetUsers()">👨‍👩‍👧‍👦 Charger les utilisateurs</button>
+            <div id="usersResult" class="result" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <script src="assets/js/api.js"></script>
+    <script>
+        // Mettre à jour le status au chargement
+        updateConnectionStatus();
+        
+        function updateConnectionStatus() {
+            const token = API.getToken();
+            const user = API.getUser();
+            
+            const statusElement = document.getElementById('connectionStatus');
+            const tokenElement = document.getElementById('tokenStatus');
+            
+            if (token && user) {
+                statusElement.textContent = `Connecté (${user.email})`;
+                statusElement.className = 'status-badge status-connected';
+                tokenElement.textContent = token.substring(0, 30) + '...';
+            } else {
+                statusElement.textContent = 'Non connecté';
+                statusElement.className = 'status-badge status-disconnected';
+                tokenElement.textContent = 'Aucun';
+            }
+        }
+        
+        function displayResult(elementId, data, success = true) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            
+            const statusClass = success ? 'success' : 'error';
+            const statusText = success ? '✅ Succès' : '❌ Erreur';
+            
+            element.innerHTML = `
+                <div class="${statusClass}">${statusText}</div>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+            
+            updateConnectionStatus();
+        }
+        
+        // Tests d'authentification
+        async function testLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const result = await API.login(email, password);
+            displayResult('loginResult', result, result.success);
+        }
+        
+        async function testGetMe() {
+            const result = await API.getMe();
+            displayResult('getMeResult', result, result !== null);
+        }
+        
+        async function testRegister() {
+            const userData = {
+                firstname: document.getElementById('registerFirstname').value,
+                lastname: document.getElementById('registerLastname').value,
+                email: document.getElementById('registerEmail').value,
+                password: document.getElementById('registerPassword').value
+            };
+            
+            const result = await API.register(userData);
+            displayResult('registerResult', result, result.success);
+        }
+        
+        // Tests des quiz
+        async function testGetQuizzes() {
+            const result = await API.getQuizzes();
+            displayResult('quizzesResult', result, result.success);
+        }
+        
+        async function testGetQuiz() {
+            const quizId = document.getElementById('quizId').value;
+            const result = await API.getQuiz(quizId);
+            displayResult('quizResult', result, result.success);
+        }
+        
+        // Tests des catégories
+        async function testGetCategories() {
+            const result = await API.getCategories();
+            displayResult('categoriesResult', result, result.success);
+        }
+        
+        // Tests des questions
+        async function testGetQuestions() {
+            const result = await API.getQuestions();
+            displayResult('questionsResult', result, result.success);
+        }
+        
+        // Tests des utilisateurs
+        async function testGetUsers() {
+            const result = await API.getUsers();
+            displayResult('usersResult', result, result.success);
+        }
+    </script>
+</body>
+</html>
+
