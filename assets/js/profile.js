@@ -97,9 +97,9 @@ function loadUserProfile(user) {
 /**
  * Gère la soumission du formulaire de profil
  */
-const profileForm = document.getElementById('profileForm');
-if (profileForm) {
-    profileForm.addEventListener('submit', async (e) => {
+const profileFormElement = document.getElementById('profileForm');
+if (profileFormElement) {
+    profileFormElement.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         showToast('Mise à jour du profil...', 'info');
