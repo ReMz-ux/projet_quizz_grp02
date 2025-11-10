@@ -292,7 +292,7 @@ async function apiGetQuestions() {
     try {
         const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.QUESTIONS}`, {
             method: 'GET',
-            headers: getHeaders()
+            headers: getHeaders(true)
         });
         
         const data = await response.json();
@@ -344,7 +344,7 @@ async function apiGetQuizzes() {
     try {
         const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.QUIZZES}`, {
             method: 'GET',
-            headers: getHeaders()
+            headers: getHeaders(true)
         });
         
         const data = await response.json();
